@@ -17,13 +17,12 @@ This project proposes the development of a social networking platform tailored s
 ## Functional Requirements:
 
 ### User Registration & Authentication:
-- Registration with name, age (optional due to implicit age targeting), email, password.
+- Registration with name, age, email, password.
 - Login/logout functionality.
 
 ### Health Articles:
 - Admin-only capabilities to create, edit, and delete health-related articles.
-- Articles organized into categories or searchable by topic.
-- Users can browse, read, comment, and save articles to their profile for later reference.
+- Users can read, comment, and save articles to their profile for later reference.
 
 ### Commenting System:
 - Users can post comments under health articles.
