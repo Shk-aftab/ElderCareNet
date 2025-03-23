@@ -101,14 +101,14 @@ This project proposes the development of a social networking platform tailored s
 
 1. **Clone the Repository & Navigate:**
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/Shk-aftab/ElderCareNet
    cd ElderCareNet/backend
    ```
 
 2. **Create a Conda Environment & Install Packages:**
    ```bash
    conda create --name eldercarenet python
-   conda activate eldercarenet_env
+   conda activate eldercarenet
    pip install -r requirements.txt
    ```
 
