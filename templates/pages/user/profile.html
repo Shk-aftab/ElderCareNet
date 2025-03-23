@@ -1,0 +1,72 @@
+{% extends "layouts/dbbase.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Your Profile</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/users/profile/update" method="post">
+                        <div class="row">
+
+                            <div class="form-group">
+                                <label class="form-control-label">Name:</label>
+                                <div class="input-group">
+                                    <input type="text" name="name" class="form-control" value="{{ user.name }}"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Email ID:</label>
+                                <div class="input-group">
+                                    <input type="email" name="email" class="form-control" value="{{ user.email }}"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Age:</label>
+                                <div class="input-group">
+                                    <input type="number" name="age" class="form-control" value="{{ user.age }}" required
+                                        min="50">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Font Size Preference:</label>
+                                <div class="input-group">
+                                    <select name="font_size_preference" class="form-control">
+                                        <option value="small" {% if user.font_size_preference=='small' %}selected{%
+                                            endif %}>Small</option>
+                                        <option value="medium" {% if user.font_size_preference=='medium' %}selected{%
+                                            endif %}>Medium</option>
+                                        <option value="large" {% if user.font_size_preference=='large' %}selected{%
+                                            endif %}>Large</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">Update Profile</button>
+
+
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

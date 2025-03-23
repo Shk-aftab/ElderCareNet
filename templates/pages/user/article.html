@@ -1,0 +1,33 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+    <main>
+        <article>
+            <h1>{{ article.title }}</h1>
+            <p>{{ article.content }}</p>
+        </article>
+        <section id="comments">
+            <h2>Comments</h2>
+            <ul>
+                {% for comment in comments %}
+                <li>
+                    <p>{{ comment.content }}</p>
+                    <small>Posted by User {{ comment.user_id }} on {{ comment.created_at }}</small>
+                </li>
+                {% endfor %}
+            </ul>
+            <form action="/articles/{{ article.article_id }}/comment" method="post">
+                <textarea name="content" placeholder="Add your comment"></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+        </section>
+        <form action="/articles/{{ article.article_id }}/save" method="post">
+            <button type="submit">Save Article</button>
+        </form>
+    </main>
+
+
+{% endblock %}

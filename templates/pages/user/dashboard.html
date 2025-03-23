@@ -1,0 +1,33 @@
+{% extends "layouts/dbbase.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+  <h1 class="display-4">Welcome, {{ user.name }}</h1>
+</div>
+<div class="container text-center">
+
+  <br>
+  <h2>Latest Health Articles</h2>
+
+  <div class="row">
+    {% for article in articles %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body pt-2">
+          <a href="{{ url_for('read_article', article_id=article.article_id) }}"
+            class="card-title h5 d-block text-darker">
+            {{ article.title }}
+          </a>
+          <p class="card-description mb-4">
+            {{ article.content }}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

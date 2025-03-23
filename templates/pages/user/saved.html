@@ -1,0 +1,18 @@
+{% extends "layouts/dbbase.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+    <main>
+        <h1>Your Saved Articles</h1>
+        <ul>
+            {% for article in articles %}
+            <li>
+                <a href="/articles/{{ article.article_id }}">{{ article.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+
+{% endblock %}

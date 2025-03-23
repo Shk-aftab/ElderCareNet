@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Article - ElderCareNet Admin</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">ElderCareNet Admin</div>
+        <div class="nav-links">
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+    <main>
+        <h1>Create New Article</h1>
+        <form action="/admin/article/create" method="post">
+            <label>Title:</label>
+            <input type="text" name="title" required>
+            <label>Content:</label>
+            <textarea name="content" required></textarea>
+            <button type="submit">Create Article</button>
+        </form>
+    </main>
+</body>
+</html>
