@@ -1,26 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Article - ElderCareNet Admin</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <nav>
-        <div class="logo">ElderCareNet Admin</div>
-        <div class="nav-links">
-            <a href="/admin/dashboard">Dashboard</a>
-            <a href="/logout">Logout</a>
+{% extends "layouts/admindbbase.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+    <h3 class="text-center mb-4">Edit Article</h3>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center">Article Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/article/{{ article.article_id }}/edit" method="post">
+                            <div class="form-group mb-3">
+                                <label class="form-control-label">Title:</label>
+                                <input type="text" name="title" class="form-control" value="{{ article.title }}" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-control-label">Content:</label>
+                                <textarea name="content" class="form-control" rows="10" style="min-height: 300px;" required>{{ article.content }}</textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Update Article</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
-    <main>
-        <h1>Edit Article</h1>
-        <form action="/admin/article/{{ article.article_id }}/edit" method="post">
-            <label>Title:</label>
-            <input type="text" name="title" value="{{ article.title }}" required>
-            <label>Content:</label>
-            <textarea name="content" required>{{ article.content }}</textarea>
-            <button type="submit">Update Article</button>
-        </form>
-    </main>
-</body>
-</html>
+    </div>
+{% endblock %}

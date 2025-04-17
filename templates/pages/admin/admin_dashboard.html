@@ -1,31 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard - ElderCareNet</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <nav>
-        <div class="logo">ElderCareNet Admin</div>
-        <div class="nav-links">
-            <a href="/admin/article/create">Create Article</a>
-            <a href="/logout">Logout</a>
+{% extends "layouts/admindbbase.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Manage Articles</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            {% for article in articles %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="/articles/{{ article.article_id }}" class="flex-grow-1">{{ article.title }}</a>
+                                <div>
+                                    <a href="/admin/article/{{ article.article_id }}/edit" class="btn btn-sm btn-primary me-2">Edit</a>
+                                    <form action="/admin/article/{{ article.article_id }}/delete" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
-    <main>
-        <h1>Admin Dashboard</h1>
-        <h2>Manage Articles</h2>
-        <ul>
-            {% for article in articles %}
-            <li>
-                <a href="/articles/{{ article.article_id }}">{{ article.title }}</a>
-                <a href="/admin/article/{{ article.article_id }}/edit">Edit</a>
-                <form action="/admin/article/{{ article.article_id }}/delete" method="post" style="display:inline;">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
-    </main>
-</body>
-</html>
+    </div>
+
+
+{% endblock %}

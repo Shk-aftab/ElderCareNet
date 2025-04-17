@@ -76,6 +76,12 @@ def save_article(db: Session, user_id: int, saved_article: schemas.SavedArticleC
 def get_saved_articles(db: Session, user_id: int):
     return db.query(SavedArticle).filter(SavedArticle.user_id == user_id).all()
 
+def get_saved_article(db: Session, user_id: int, article_id: int):
+    return db.query(SavedArticle).filter(
+        SavedArticle.user_id == user_id,
+        SavedArticle.article_id == article_id
+    ).first()
+
 # ----- Admin CRUD -----
 def get_admin_by_email(db: Session, email: str):
     return db.query(Admin).filter(Admin.email == email).first()

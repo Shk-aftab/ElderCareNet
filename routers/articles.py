@@ -18,6 +18,12 @@ async def list_articles(request: Request, db: Session = Depends(get_db)):
     articles = crud.get_articles(db)
     return user_templates.TemplateResponse("index.html", {"request": request, "articles": articles})
 
+@router.get("/saved")
+async def saved_articles(request: Request, db: Session = Depends(get_db), current_user: schemas.UserOut = Depends(get_current_user)):
+    saved = crud.get_saved_articles(db, current_user.user_id)
+    articles = [crud.get_article(db, s.article_id) for s in saved]
+    return user_templates.TemplateResponse("saved.html", {"request": request, "articles": articles})
+
 @router.get("/{article_id}")
 async def read_article(article_id: int, request: Request, db: Session = Depends(get_db)):
     article = crud.get_article(db, article_id)
@@ -43,12 +49,11 @@ async def save_article(
     db: Session = Depends(get_db),
     current_user: schemas.UserOut = Depends(get_current_user)
 ):
+    # Check if article is already saved
+    existing_save = crud.get_saved_article(db, current_user.user_id, article_id)
+    if existing_save:
+        return RedirectResponse(url=f"/articles/{article_id}", status_code=302)
+    
     saved_data = schemas.SavedArticleCreate(article_id=article_id)
     crud.save_article(db, current_user.user_id, saved_data)
-    return RedirectResponse(url="/users/dashboard", status_code=302)
-
-@router.get("/saved")
-async def saved_articles(request: Request, db: Session = Depends(get_db), current_user: schemas.UserOut = Depends(get_current_user)):
-    saved = crud.get_saved_articles(db, current_user.user_id)
-    articles = [crud.get_article(db, s.article_id) for s in saved]
-    return user_templates.TemplateResponse("saved.html", {"request": request, "articles": articles})
+    return RedirectResponse(url=f"/articles/{article_id}", status_code=302)

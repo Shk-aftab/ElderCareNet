@@ -10,18 +10,23 @@
 
   <br>
   <h2>Latest Health Articles</h2>
+  <br>
+
+
 
   <div class="row">
     {% for article in articles %}
     <div class="col-md-4 mb-4">
-      <div class="card">
-        <div class="card-body pt-2">
-          <a href="{{ url_for('read_article', article_id=article.article_id) }}"
-            class="card-title h5 d-block text-darker">
-            {{ article.title }}
-          </a>
-          <p class="card-description mb-4">
-            {{ article.content }}
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="{{ url_for('read_article', article_id=article.article_id) }}" class="text-decoration-none text-dark">
+              {{ article.title }}
+            </a>
+          </h5>
+          <p class="card-text">
+            {{ article.content[:100] }}...
+            <a href="{{ url_for('read_article', article_id=article.article_id) }}" class="text-primary">Read More</a>
           </p>
         </div>
       </div>

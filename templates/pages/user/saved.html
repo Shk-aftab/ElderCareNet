@@ -1,18 +1,29 @@
 {% extends "layouts/dbbase.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Saved Articles{% endblock %}
 
 {% block content %}
-
-    <main>
-        <h1>Your Saved Articles</h1>
-        <ul>
-            {% for article in articles %}
-            <li>
-                <a href="/articles/{{ article.article_id }}">{{ article.title }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </main>
-
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Your Saved Articles</h1>
+    
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="/articles/{{ article.article_id }}" class="text-decoration-none text-dark">
+                            {{ article.title }}
+                        </a>
+                    </h5>
+                    <p class="card-text">
+                        {{ article.content[:100] }}...
+                        <a href="/articles/{{ article.article_id }}" class="text-primary">Read More</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
